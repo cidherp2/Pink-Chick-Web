@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const User = require('../../models/User')
-const Ticket = require('../../models/Tickets')
+const {User} = require('../../models/index')
+const {Ticket} = require('../../models/index')
 
 router.post('/', async (req,res) =>{
      try{
@@ -22,10 +22,14 @@ router.get('/', async (req,res)=>{
     try{
         const findUsers = await User.findAll({
             include:[{model:Ticket}],
+           
         })
+        // res.send(findUsers)
+        // const usersArray = findUsers.map(user => user.get({ plain: true }));
+        // console.log(findUsers)
         res.json({
             message:"The users",
-            user:findUsers.toJSON()
+            user:findUsers
             
         })
     } catch(err){

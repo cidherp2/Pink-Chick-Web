@@ -7,9 +7,9 @@ const routes = require('./routes');
 
 
 sequelize.sync().then(()=> console.log("database is ready"))
-app.get("/pink", (req, res) =>{
-    res.send("hello!")
-})
+// app.get("/pink", (req, res) =>{
+//     res.send("hello!")
+// })
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

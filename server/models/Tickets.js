@@ -61,7 +61,7 @@ Ticket.init({
     },
   },
   sequelize,
-  modelName:'Ticket',
+  modelName:'ticket',
   timestamps: true,
   freezeTableName: true,
   underscored: false
