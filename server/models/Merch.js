@@ -1,5 +1,5 @@
 const {Model, DataTypes} = require('sequelize');
-const sequelize = require ('../database')
+const sequelize = require ('../config/connection')
 
 class Merch extends Model {}
 

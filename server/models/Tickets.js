@@ -1,7 +1,8 @@
-const { Model, DataTypes, Sequelize } = require('sequelize');
-const sequelize = require('../database');
+const { Model, DataTypes, Sequelize, } = require('sequelize');
+const sequelize = require('../config/connection');
 const { v4: uuidv4 } = require('uuid');
-const Band = require('../models/Bands')
+
+
 
 class Ticket extends Model {}
 
@@ -32,19 +33,30 @@ Ticket.init({
     type: DataTypes.STRING,
     allowNull: false,
   },
+
+  userId:{
+    type:DataTypes.INTEGER,
+    allowNull: false,
+    underscored:false,
+    references:{
+      model:'users',
+      key: 'id'
+    }
+  },
 }, {
   hooks: {
     async beforeCreate(newTicket,options) {
         try{
             const ticketCount = await Ticket.count()
-        const ticketLimit = 20;
+        const ticketLimit = 25;
         if (ticketCount >= ticketLimit) {
             throw new Error('Ticket limit reached. Cannot create more tickets.');
           }
       newTicket.id = await uuidv4();
-        }catch(err){
-            console.error('Error creating ticket:', error);
-            return Promise.reject(error);
+
+        } catch(err){
+            console.error ('Error creating ticket:' + err);
+            return Promise.reject(err);
         }
     },
   },
@@ -54,12 +66,16 @@ Ticket.init({
   freezeTableName: true,
   underscored: false
 });
-Ticket.belongsToMany(Band,{through: 'TicketBands'})
-Band.belongsToMany(Ticket, { through: 'TicketBands' });
+
+// Ticket.belongsToMany(Band,{through: 'TicketBands'})
+// Band.belongsToMany(Ticket, { through: 'TicketBands' });
 // Instance method to format date when fetching data
+
 Ticket.prototype.getFormattedDate = function () {
   return this.date.toLocaleDateString('en-GB');
 };
+
+
 
 
 

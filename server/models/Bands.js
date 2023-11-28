@@ -1,6 +1,6 @@
 // bands model
 const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../database');
+const sequelize = require('../config/connection');
 
 class Band extends Model {}
 
