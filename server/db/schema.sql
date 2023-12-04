@@ -1,5 +1,5 @@
 -- DROP DATABASE
-DROP DATABASE IF EXISTS pinkchicks_db;
+DROP DATABASE IF EXISTS `pinkchicks_db`;
 
 -- CREATE DATABASE
-CREATE DATABASE pinkchicks_db;
+CREATE DATABASE `pinkchicks_db`;

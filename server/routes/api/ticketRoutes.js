@@ -29,4 +29,15 @@ res.json({
     }
 })
 
+router.get('/', async (req,res) =>{
+    try{
+        const getTickets = await Ticket.findAll()
+        res.json({
+            ticket: getTickets
+        })
+    } catch(err){
+        console.log('Erro trying to get the tickets: ', err)
+    }
+})
+
 module.exports = router

@@ -15,4 +15,24 @@ router.post('/', async (req,res) =>{
     }
 })
 
+router.get('/', async (req,res) => {
+    try {
+        const getMerch = await Merch.findAll()
+        res.json({
+            merch: getMerch
+        })
+    } catch (err){
+        console.log("There was an error: " + err );
+    }
+})
+
+router.get('/:id', async (req, res) =>{
+    try{
+       const getMerch = await Merch.findByPk(req.params.id);
+       res.send(getMerch);
+    }catch(err){
+        console.log('An error ocurred fetching the product: ', err)
+    }
+})
+
 module.exports = router;
