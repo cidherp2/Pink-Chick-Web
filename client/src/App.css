@@ -196,3 +196,43 @@ bottom: 1rem;
   }
 }
 
+@media (min-width: 769px) and (max-width: 900px) {
+  #nav-list {
+    max-width: max-content;
+    position: relative;
+    right: 1rem;
+    padding: 0;
+    }
+  
+    .navBar{
+      display: flex;
+    }
+    .navContainer{
+     max-width: min-content;
+      display: flex;
+      justify-content: center;
+    }
+  
+}
+
+@media (min-width: 150px) and (max-width: 379px) {
+
+  #nav-list {
+    max-width: 100%;
+    position: relative;
+    right: 1rem;
+    padding: 0;
+    }
+  
+    .navBar{
+      display: flex;
+    }
+    .navContainer{
+     max-width: min-content;
+      display: flex;
+      justify-content: center;
+    }
+
+}
+
+

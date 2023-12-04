@@ -13,13 +13,11 @@ flex-direction:row;
 margin-top:3rem;
 
 
-@media (min-width: 380px) and (max-width:768px){
+@media (min-width: 375px) and (max-width:768px){
    flex-direction:column;
    flex-wrap:nowrap;
-   justify-content:space-between;
    margin-top:0;
    align-items:center;
-   margin-bottom: 3rem;
  
   }
 
@@ -44,6 +42,7 @@ margin-top:3rem;
 const MerchStore = () => {
     return (
      <MerchContainer>
+     <Card/>
      <Card/>
      </MerchContainer>
   );
