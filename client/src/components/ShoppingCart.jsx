@@ -2,6 +2,8 @@ import React from 'react';
 import CartItem from './CartItemPink';
 import { useCartContext } from '../utils/CartContext';
 import styled from 'styled-components';
+import CartItemModal from './PaymentModal';
+import { useState } from 'react';
 const color = "black"
 
 const Strong = styled.strong /*style*/ `
@@ -21,6 +23,13 @@ padding-left:3rem;
   }
 
 `
+
+const Button = styled.button /*style*/`
+margin-top: 2rem;
+@media (min-width:360px) and (max-width:780px) {
+  margin-right:4rem;
+  }
+`
 const DivStrong = styled.div /*style*/ `
 flex-direction:row;
 display:flex;
@@ -38,6 +47,26 @@ color: #000;
 
 const Cart = () => {
   const { cart, setCart } = useCartContext();
+  const [showModal, setShowModal] = useState(false);
+
+  const handleProceedToCheckout = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  const handleCheckout = () => {
+    // Handle checkout logic
+    // ...
+    setShowModal(false);
+  };
+
+  const handleContinueShopping = () => {
+    setShowModal(false);
+    // Add any logic for continuing shopping
+  };
 
   const handleRemove = (itemId) => {
     setCart({
@@ -79,12 +108,23 @@ const Cart = () => {
             <DivStrong>
               <Strong>Precio Total: ${totalPrice.toFixed(2)}</Strong>
             </DivStrong>
+            <Button onClick={handleProceedToCheckout}>Proceed to Checkout</Button>
           </div>
         ) : (
           <Strong className='vacio'>Tu carrito está vacío</Strong>
         )}
-      </div>
-    );
+       
+      {showModal && (
+        <CartItemModal
+          items={cart.items}
+          totalPrice={totalPrice}
+          onClose={handleCloseModal}
+          onCheckout={handleCheckout}
+          onContinueShopping={handleContinueShopping}
+        />
+      )}
+    </div>
+  );
 };
 
 export default Cart;

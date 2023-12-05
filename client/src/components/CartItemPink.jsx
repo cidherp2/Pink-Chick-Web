@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+ // Import CheckoutForm component
+
 
 const ItemContainer = styled.div /*style*/`
   display: flex;
@@ -96,8 +98,15 @@ flex-direction:column;
   
 }
 `
+const SizeSelector = styled.select /*style*/`
+  width: 10rem;
 
-const CartItem = ({ item, onRemove, onQuantityChange }) => {
+  @media (min-width: 360px) and (max-width: 780px) {
+    width: 4rem;
+  }
+`;
+
+const CartItem = ({ item, onRemove, onQuantityChange, onSizeChange }) => {
   const price = !isNaN(item.price) ? parseInt(item.price, 10) : 0;
 
   return (
@@ -117,6 +126,15 @@ const CartItem = ({ item, onRemove, onQuantityChange }) => {
           value={item.quantity}
           onChange={(e) => onQuantityChange(item.id, parseInt(e.target.value, 10))}
         />
+        <SizeSelector
+          value={item.size}
+          onChange={(e) => onSizeChange(item.id, e.target.value)}
+        >
+          <option value="small">S</option>
+          <option value="medium">M</option>
+          <option value="large">L</option>
+          <option value="large">XL</option>
+        </SizeSelector>
         <RemoveButton onClick={() => onRemove(item.id)}>Remove</RemoveButton>
       </DivInfo>
     </ItemContainer>
