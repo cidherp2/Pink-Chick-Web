@@ -1,6 +1,8 @@
 // MerchModal.js
 import React from 'react';
 import styled from 'styled-components';
+import { useCartContext } from '../utils/CartContext'
+
 
 const ModalOverlay = styled.div /*style*/ `
   position: fixed;
@@ -32,19 +34,26 @@ const Cerrar = styled.button /*style*/ `
   background-color: #e74c3c;
 `;
 
-const MerchModal = ({ isOpen, closeModal, item }) => {
+const MerchModal = ({ isOpen, closeModal, item, selectedItem }) => {
+  const {cart,setCart} = useCartContext()
+
   if (!isOpen) {
     return null;
   }
 
   const addToCart = () => {
     try {
-      console.log("Item added to cart:", item);
-      // You can add your logic to add the item to the cart here
+      setCart({items:[...cart?.items ?? [],item]})
+    console.log(item);
+    closeModal();
+      console.log("Item added to cart:", cart);
+  
     } catch (error) {
       console.error("Error adding item to cart:", error);
     }
   };
+
+
 
   return (
     <ModalOverlay onClick={closeModal}>

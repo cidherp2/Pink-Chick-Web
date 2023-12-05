@@ -1,10 +1,12 @@
-import { Children, createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 const emptyCart = {};
-const CartContext = createContext()
-const useCartContext = () => useContext(CartContext)
+export const CartContext = createContext()
+const storedCart = localStorage.getItem('cart');
+const cartMemory = JSON.parse(storedCart);
+export const useCartContext = () => useContext(CartContext)
 
 export const CartProvider = ({children}) => {
-    const [cart,setCart] = useState(emptyCart)
+    const [cart,setCart] = useState(cartMemory)
 
     return(
         <CartContext.Provider value={{cart,setCart}}>

@@ -110,6 +110,8 @@ const MerchInfo = styled.div /*style*/`
 const Card = () => {
   const [merch, setMerch] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
+ 
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -138,6 +140,8 @@ const Card = () => {
     };
     fetchData();
   }, []);
+
+
   // console.log('Merc state ', merch);
 
   const openModal = (item) => {
@@ -147,6 +151,8 @@ const Card = () => {
   const closeModal = () => {
     setSelectedItem(null);
   };
+
+ 
 
   return (
     <>

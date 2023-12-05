@@ -22,11 +22,13 @@ const NavBar = () => {
                 <li>CONCIERTOS</li>
               </button>
             </Link>
-            <Link to="/Noticias">
+            {location.pathname !=='/Carrito' ? (
+            <Link to="/Carrito">
               <button className="buttonNav">
                 <li>CARRITO</li>
               </button>
             </Link>
+            ):null}
             {location.pathname !== '/' ? (
               <Link to="/">
                 <button className="buttonNav">

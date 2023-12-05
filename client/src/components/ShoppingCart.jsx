@@ -1,76 +1,90 @@
-import React, { useState } from 'react';
+import React from 'react';
+import CartItem from './CartItemPink';
+import { useCartContext } from '../utils/CartContext';
 import styled from 'styled-components';
-import { useCartContext } from '../utils/CartContext'; // Import the CartContext
+const color = "black"
 
-const ShoppingCartContainer = styled.div /*style*/`
-  width: 300px;
-  border: 1px solid #ccc;
-  padding: 10px;
-`;
+const Strong = styled.strong /*style*/ `
+font-size:xx-large;
+background:white;
+padding-right: 1rem;
+padding-left:1rem;
+border-radius:1rem;
+&.vacio{
+  color: #000;
+  padding-right: 3rem;
+padding-left:3rem;
 
-const CartItem = styled.div /*style*/`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-`;
+}
+@media (min-width:360px) and (max-width:780px) {
+  font-size:larger;
+  }
 
-const QuantitySelector = styled.select /*style*/`
-  margin-left: 10px;
-`;
+`
+const DivStrong = styled.div /*style*/ `
+flex-direction:row;
+display:flex;
+justify-content:center;
 
-const ShoppingCart = () => {
+color: #000;
+
+@media (min-width:360px) and (max-width:780px) {
+  width:85%;
+  height: 2rem;
+  }
+
+
+`
+
+const Cart = () => {
   const { cart, setCart } = useCartContext();
 
-  const handleQuantityChange = (itemId, newQuantity) => {
-    setCart((prevCart) => ({
-      ...prevCart,
-      [itemId]: { ...prevCart[itemId], quantity: newQuantity },
-    }));
-  };
-
-  const handleRemoveItem = (itemId) => {
-    const newCart = { ...cart };
-    delete newCart[itemId];
-    setCart(newCart);
-  };
-
-  const calculateTotal = () => {
-    let total = 0;
-    Object.values(cart).forEach((item) => {
-      total += item.price * item.quantity;
+  const handleRemove = (itemId) => {
+    setCart({
+      items: cart?.items?.filter((item) => item.id !== itemId) || [],
     });
-    return total.toFixed(2);
   };
 
-  return (
-    <ShoppingCartContainer>
-      <h2>Shopping Cart</h2>
-      {Object.values(cart).map((item) => (
-        <CartItem key={item.id}>
-          <div>
-            <strong>{item.name}</strong> - ${item.price} each
-          </div>
-          <div>
-            <QuantitySelector
-              value={item.quantity}
-              onChange={(e) => handleQuantityChange(item.id, parseInt(e.target.value))}
-            >
-              {[...Array(10).keys()].map((number) => (
-                <option key={number + 1} value={number + 1}>
-                  {number + 1}
-                </option>
-              ))}
-            </QuantitySelector>
-            <button onClick={() => handleRemoveItem(item.id)}>Remove</button>
-          </div>
-        </CartItem>
-      ))}
+  // Function to update quantity
+  const handleQuantityChange = (itemId, newQuantity) => {
+    setCart({
+      items: cart?.items?.map((item) =>
+        item.id === itemId ? { ...item, quantity: newQuantity } : item
+      ),
+    });
+  };
+
+  // Calculate total price
+  const totalPrice =
+    cart?.items?.reduce(
+      (total, item) => total + item.price * (item.quantity || 1),
+      0
+    ) ?? 0;
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+    return (
       <div>
-        <strong>Total: ${calculateTotal()}</strong>
+        <h1>Carrito</h1>
+        {cart?.items && cart.items.length > 0 ? (
+          <div>
+            {cart.items.map((item) => (
+              <CartItem
+                key={item.id}
+                item={item}
+                onRemove={handleRemove}
+                onQuantityChange={handleQuantityChange}
+              />
+            ))}
+            <DivStrong>
+              <Strong>Precio Total: ${totalPrice.toFixed(2)}</Strong>
+            </DivStrong>
+          </div>
+        ) : (
+          <Strong className='vacio'>Tu carrito está vacío</Strong>
+        )}
       </div>
-      <button>Checkout</button>
-    </ShoppingCartContainer>
-  );
+    );
 };
 
-export default ShoppingCart;
+export default Cart;
