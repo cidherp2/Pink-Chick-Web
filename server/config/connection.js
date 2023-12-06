@@ -3,7 +3,7 @@
 const { Sequelize } = require("sequelize");
 
 const db_options = {
-  host: process.env.DB_HOST || "localhost",
+  host: process.env.DB_HOST || "192.168.1.70",
   dialect: process.env.DB_DIALECT || "mysql",
   port: process.env.DB_PORT || 3306
 };

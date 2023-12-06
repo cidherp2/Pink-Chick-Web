@@ -116,12 +116,10 @@ const Card = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // const response = await fetch("http://localhost:5173/pink/api/merch" );
-        //regresar el fetch a localhost para producción
+       
         const response = await fetch(
-          'http://localhost:5173/pink/api/merch' 
-          // &&
-          //   'http://192.168.1.70:5173/pink/api/merch'
+          'http://localhost:5173/pink/api/merch' &&
+           "http://192.168.1.70:5173/pink/api/merch"
         );
         if (!response.ok) {
           throw new Error('Network response was not ok');

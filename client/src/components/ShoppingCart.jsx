@@ -68,20 +68,33 @@ const Cart = () => {
     // Add any logic for continuing shopping
   };
 
-  const handleRemove = (itemId) => {
+   const handleRemove = (itemId) => {
     setCart({
       items: cart?.items?.filter((item) => item.id !== itemId) || [],
     });
   };
 
   // Function to update quantity
-  const handleQuantityChange = (itemId, newQuantity) => {
+   const handleQuantityChange = (itemId, newQuantity) => {
     setCart({
       items: cart?.items?.map((item) =>
-        item.id === itemId ? { ...item, quantity: newQuantity } : item
+        item.id === itemId ? { ...item, quantity: newQuantity  } : item 
       ),
     });
   };
+   
+
+
+  
+
+  const handleSizeChange = (itemId, newSize) => {
+    setCart({
+      items: cart?.items?.map((item) =>
+        item.id === itemId ? { ...item, size: newSize } : item
+      ),
+    });
+  };
+
 
   // Calculate total price
   const totalPrice =
@@ -103,6 +116,8 @@ const Cart = () => {
                 item={item}
                 onRemove={handleRemove}
                 onQuantityChange={handleQuantityChange}
+                onSizeChange={handleSizeChange}
+               
               />
             ))}
             <DivStrong>
@@ -121,6 +136,10 @@ const Cart = () => {
           onClose={handleCloseModal}
           onCheckout={handleCheckout}
           onContinueShopping={handleContinueShopping}
+          onQuantityChange={handleQuantityChange}
+          onRemove={handleRemove}
+          onSizeChange={handleSizeChange}
+          
         />
       )}
     </div>

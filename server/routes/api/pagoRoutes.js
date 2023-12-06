@@ -7,17 +7,19 @@ router.post('/create-checkout-session', async (req, res) => {
   const { items, totalPrice } = req.body;
 
   const session = await stripe.checkout.sessions.create({
-    payment_method_types: ['card'],
+    payment_method_types: ['card', 'oxxo'],
     line_items: items.map(item => ({
       price_data: {
         currency: 'mxn',
         product_data: {
           name: item.name,
+          // images: item.imageUrl
           // Add other product details as needed
         },
         unit_amount: item.price * 100, // assuming price is in currency subunits (cents)
+        
       },
-      quantity: item.quantity,
+      quantity: item.quantity || 1,
     })),
     mode: 'payment',
     success_url: 'https://your-website.com/success',

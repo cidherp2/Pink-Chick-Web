@@ -109,6 +109,7 @@ const SizeSelector = styled.select /*style*/`
 const CartItem = ({ item, onRemove, onQuantityChange, onSizeChange }) => {
   const price = !isNaN(item.price) ? parseInt(item.price, 10) : 0;
 
+
   return (
     <ItemContainer>
       <ItemDetails>
@@ -121,9 +122,9 @@ const CartItem = ({ item, onRemove, onQuantityChange, onSizeChange }) => {
       <DivInfo>
         <QuantityInput
           type="number"
-          min="1"
+          min="0"
           pattern="\d*"
-          value={item.quantity}
+          value={item.quantity || 1 }
           onChange={(e) => onQuantityChange(item.id, parseInt(e.target.value, 10))}
         />
         <SizeSelector
