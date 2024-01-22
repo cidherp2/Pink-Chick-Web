@@ -122,9 +122,9 @@ const CartItem = ({ item, onRemove, onQuantityChange, onSizeChange }) => {
       <DivInfo>
         <QuantityInput
           type="number"
-          min="0"
+          min="1"
           pattern="\d*"
-          value={item.quantity || 1 }
+          value={item.quantity}
           onChange={(e) => onQuantityChange(item.id, parseInt(e.target.value, 10))}
         />
         <SizeSelector

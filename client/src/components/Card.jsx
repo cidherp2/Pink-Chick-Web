@@ -30,13 +30,15 @@ const MerchCard = styled.div /*style*/`
     min-height: fit-content;
     margin-bottom: 1rem;
     margin-right: 1.9rem;
+    
   }
-  @media (max-width: 360px) {
+  @media (max-width: 361px) {
     width: 90%;
     height: 65%;
     min-height: fit-content;
     margin-bottom: 1rem;
     margin-right: 3rem;
+    
   }
 
   @media (min-width: 901px) {
@@ -80,7 +82,9 @@ const MerchInfo = styled.div /*style*/`
     width: 90%;
     text-align: center;
     font-size: 90%;
+    
   }
+
   h3 {
     height: 10%;
     width: 90%;
@@ -93,13 +97,19 @@ const MerchInfo = styled.div /*style*/`
     
   }
 
+  @media (min-width: 300px) and (max-width: 359px) {
+    
+      min-height: fit-content;
+      gap: 1.7rem;
+   
+  }
   @media (min-width: 360px) and (max-width: 768px) {
     
       min-height: fit-content;
       gap: 1.7rem;
    
   }
-  @media (max-width: 360px) {
+  @media (max-width: 361px) {
    
       min-height: fit-content;
       gap: 1rem;

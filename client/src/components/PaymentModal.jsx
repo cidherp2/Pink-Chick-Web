@@ -4,6 +4,7 @@ import CartItem from './CartItemPink';
 import { useEffect } from 'react';
 import CheckoutForm from './CheckOutForm';
 
+
 const ModalOverlay = styled.div`
   position: fixed;
   top: 0;
@@ -93,9 +94,9 @@ const PaymentMethodDropdown = styled.select`
 `;
 
 
-const CartItemModal = ({ items, totalPrice, onClose, onCheckout,onQuantityChange,onRemove,onSizeChange }) => {
+const CartItemModal = ({ items, totalPrice, onClose, onCheckout,onQuantityChange,onRemove,onSizeChange,onValidation}) => {
     const [formData, setFormData] = useState({
-        paymentMethod: '',
+        // paymentMethod: '',
         address: '',
         zipcode: '',
         name: '',
@@ -103,18 +104,20 @@ const CartItemModal = ({ items, totalPrice, onClose, onCheckout,onQuantityChange
         phone: '',
     });
 
+    const [isVisible, setIsVisible] = useState(true);
+
     const [isFormValid, setIsFormValid] = useState(false);
 
     const [errors, setErrors] = useState({});
 
     const validateEmail = (email) => {
-        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+\s*$/;
         return regex.test(email);
     };
    
 
     const validatePhone = (phone) => {
-        const regex = /^\d{10}$/; // Assumes a 10-digit phone number
+        const regex = /^\d{10}\s*$/; // Assumes a 10-digit phone number
         return regex.test(phone);
     };
 
@@ -123,9 +126,9 @@ const CartItemModal = ({ items, totalPrice, onClose, onCheckout,onQuantityChange
         // Validation logic
         const newErrors = {};
 
-        if (!formData.paymentMethod) {
-            newErrors.paymentMethod = 'Payment method is required';
-        }
+        // if (!formData.paymentMethod) {
+        //     newErrors.paymentMethod = 'Payment method is required';
+        // }
 
         if (!formData.address) {
             newErrors.address = 'Address is required';
@@ -150,6 +153,7 @@ const CartItemModal = ({ items, totalPrice, onClose, onCheckout,onQuantityChange
         if (Object.keys(newErrors).length === 0) {
             // No errors, proceed with checkout
             onCheckout(formData);
+            
         } else {
             // Set validation errors
             setErrors(newErrors);
@@ -157,71 +161,69 @@ const CartItemModal = ({ items, totalPrice, onClose, onCheckout,onQuantityChange
 
     };
 
+
+
+   
+
     const handleChange = (e) => {
+        // validateForm();
         setFormData({
             ...formData,
             [e.target.name]: e.target.value,
         });
-
-        validateForm(e);
-        
     };
 
-    const validateForm = () => {
+    const  validateForm = async (e) => {
         const newErrors = {};
         let flag = 0;
-        if (!formData.paymentMethod) {
-            newErrors.paymentMethod = 'Payment method is required';
-        }
-
-        flag++
-    
+        // if (!formData.paymentMethod) {
+        //    console.log( newErrors.paymentMethod = 'Payment method is required');
+        // }else{
+        //     flag++
+        // }
         if (!formData.address) {
-            newErrors.address = 'Address is required';
+            console.log(newErrors.address = 'Address is required');
         }
-        flag++
-        if (!formData.zipcode) {
-            newErrors.zipcode = 'Zipcode is required';
-        }
-        flag++
-        if (!formData.name) {
-            newErrors.name = 'Name is required';
-        }
-        flag++
-        if (!formData.email || !validateEmail(formData.email)) {
-            newErrors.email = 'Valid email is required';
-        }
-        flag++
-        if (!formData.phone || !validatePhone(formData.phone)) {
-            newErrors.phone = 'Valid phone number is required';
-        }
-        flag++
-    
-        // Check if there are no errors
-
-        if(flag === 6) {
-            setIsFormValid(true);
-        } 
         
+        if (!formData.zipcode) {
+            console.log(newErrors.zipcode = 'Zipcode is required');
+        }
+        
+        if (!formData.name) {
+            console.log(newErrors.name = 'Name is required');
+        }
+       
+        if (!formData.email || !validateEmail(formData.email)) {
+            console.log(newErrors.email = 'Valid email is required');
+        }
+       
+        if (!formData.phone || !validatePhone(formData.phone)) {
+            console.log(newErrors.phone = 'Valid phone number is required');
+        }
+        
+
         const isValid = Object.keys(newErrors).length === 0;
 
-    //     console.log('is valid? : ' + isValid )
-    
-    //     if (isValid) {
+        if (isValid) {
+            // No errors, proceed with checkout
+            setIsFormValid(true);
+            setIsVisible(false)
+            localStorage.setItem('formData', JSON.stringify(formData));
+        } else {
+            // Set validation errors
+            await setErrors(newErrors);
+            await setIsFormValid(false);
+            
+        }
+        
+        
 
-    //         console.log('is valid? : ' + isValid )
-    //     // Update isFormValid state
-    //     setIsFormValid(true);
-    // }
+        console.log(isValid);
+        // Check if there are no errors
+
+
+   
     };
-
-    // useEffect(() => {
-    //     // Validate the form when the component mounts
-    //     validateForm();
-    // }, []);
-
-  
-    
 
     return (
         <ModalOverlay>
@@ -241,6 +243,7 @@ const CartItemModal = ({ items, totalPrice, onClose, onCheckout,onQuantityChange
                     ))}
                 </div>
                 <p>Total Price: ${totalPrice.toFixed(2)}</p>
+                {isVisible && (
                 <Form onSubmit={handleSubmit}>
                     {/* <PaymentMethodDropdown
                         name="paymentMethod"
@@ -257,7 +260,7 @@ const CartItemModal = ({ items, totalPrice, onClose, onCheckout,onQuantityChange
                     <Input
                         type="text"
                         name="address"
-                        placeholder="Address"
+                        placeholder="Dirección"
                         value={formData.address}
                         onChange={handleChange }
                     />
@@ -266,7 +269,7 @@ const CartItemModal = ({ items, totalPrice, onClose, onCheckout,onQuantityChange
                     <Input
                         type="text"
                         name="zipcode"
-                        placeholder="Zipcode"
+                        placeholder="Código postal"
                         value={formData.zipcode}
                         onChange={handleChange }
                     />
@@ -275,7 +278,7 @@ const CartItemModal = ({ items, totalPrice, onClose, onCheckout,onQuantityChange
                     <Input
                         type="text"
                         name="name"
-                        placeholder="Name"
+                        placeholder="Nombre"
                         value={formData.name}
                         onChange={handleChange }
                     />
@@ -286,25 +289,33 @@ const CartItemModal = ({ items, totalPrice, onClose, onCheckout,onQuantityChange
                         name="email"
                         placeholder="Email"
                         value={formData.email}
-                        onChange={handleChange }
+                        onChange={handleChange}
                     />
                     {errors.email && <ErrorMessage>{errors.email}</ErrorMessage>}
 
                     <Input
                         type="text"
                         name="phone"
-                        placeholder="Phone"
+                        placeholder="Teléfono 10 dígitos"
                         value={formData.phone}
-                        onChange={handleChange }
+                        onChange={handleChange}
                     />
                     {errors.phone && <ErrorMessage>{errors.phone}</ErrorMessage>}
 
+                <button onClick={validateForm}>Valida mi info</button>
+            
+                </Form>
+                )}
+
+                    {!isVisible &&(
                     <ButtonContainer>
                     <CheckoutForm items={items} totalPrice={totalPrice} isFormValid={isFormValid}/>
                         {/* <ProceedToCheckoutButton type="submit">Pagar</ProceedToCheckoutButton> */}
                     </ButtonContainer>
-                </Form>
+                     )}
+               
                 <CartCheckoutButton onClick={onClose}>Salir</CartCheckoutButton>
+               
             </ModalContent>
         </ModalOverlay>
     );
