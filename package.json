@@ -8,6 +8,7 @@
     "start": "concurrently \"cd server && npm run start \" \"cd client && npm run dev\"",
     "develop": "concurrently \"cd ./server && npm run watch\" \"cd ./client && npm run dev\"",
     "client": "cd ./client && npm run dev",
+    "buildclient": "cd ./client && npm run build",
     "serv": "cd ./server && npm run start",
     "installcliente": "npm install --prefix ./client ",
         "postinstall": "npm install --prefix ./server && npm install --prefix ./client "
