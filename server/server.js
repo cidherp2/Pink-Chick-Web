@@ -6,7 +6,7 @@ const routes = require('./routes');
 // const { createDb } = require("./models/init");
 
 
-sequelize.sync({ force: true }).then(()=> console.log("database is ready"))
+sequelize.sync().then(()=> console.log("database is ready"))
 // app.get("/pink", (req, res) =>{
 //     res.send("hello!")
 // })
