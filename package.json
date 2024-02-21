@@ -5,12 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"cd server && npm run start \" \"cd client && npm run dev\"",
+    "start": "concurrently \"cd server && npm run start\" \"cd client && npm run build && serve -s dist\"",
     "develop": "concurrently \"cd ./server && npm run watch\" \"cd ./client && npm run dev\"",
     "client": "cd ./client && npm run dev",
     "buildclient": "cd ./client && npm run build",
-    "serv": "cd ./server && npm run start",
-    "installcliente": "npm install --prefix ./client ",
+    "serve": "cd ./server && npm run start",
+    "r": "npm install --prefix ./client ",
         "postinstall": "npm install --prefix ./server && npm install --prefix ./client "
   },
   "keywords": [],
