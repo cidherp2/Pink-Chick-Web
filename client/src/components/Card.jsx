@@ -128,8 +128,8 @@ const Card = () => {
       try {
        
         const response = await fetch(
-          'http://localhost:5173/pink/api/merch' &&
-           "http://192.168.1.70:5173/pink/api/merch"
+          'http://localhost:5173/pink/api/merch' 
+          
         );
         if (!response.ok) {
           throw new Error('Network response was not ok');

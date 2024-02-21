@@ -1,16 +1,13 @@
 {
 	"folders": [
 		{
-			"path": "../../.."
+			"path": "../../../../../Challenge Hexalud"
 		},
 		{
-			"path": "../../../../../challenges/E-commerce-backend"
+			"path": "../../../../../ARRAYS"
 		},
 		{
-			"path": "../../../../../challenges/Travelifico"
-		},
-		{
-			"path": "../../../../../challenges/GameNonStop"
+			"path": "../../../../../Ejercicio2"
 		}
 	],
 	"settings": {}
