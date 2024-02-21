@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "predeploy": "npm install --prefix ./client && npm run buildclient",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "concurrently \"cd server && npm run start\" \"cd client && npm run build && cd client npm run start\"",
     "develop": "concurrently \"cd ./server && npm run watch\" \"cd ./client && npm run dev\"",
@@ -11,8 +12,7 @@
     "buildclient": "cd ./client && npm run build",
     "serve": "cd ./server && npm run start",
     "installcliente": "npm install --prefix ./client ",
-    "postinstall": "npm install --prefix ./server && npm install --prefix ./client ",
-    "heroku-postbuild": "npm run build --prefix ./client" 
+    "postinstall": "npm install --prefix ./server && npm install --prefix ./client "
   },
   "keywords": [],
   "author": "",
