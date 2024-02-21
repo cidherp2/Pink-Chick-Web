@@ -1,0 +1,63 @@
+# Node.js
+node_modules/
+
+# Dependency directories
+/jspm_packages/
+/bower_components/
+
+# Logs and databases
+*.log
+*.sqlite
+*.sqlite3
+*.log.*
+npm-debug.log*
+
+# Build and compiled files
+/dist/
+/out/
+/build/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Editor-specific files
+.vscode/
+*.sublime-project
+*.sublime-workspace
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# IDE-specific files
+.idea/
+
+# Package-lock files
+package-lock.json
+yarn.lock
+
+# Environment variables
+.env
+
+# Miscellaneous
+*.bak
+*.tmp
+*.tmp.*
+*.swp
+*.orig
+*_orig
+*.rej
+.rej.*
+*~
+*.~
+*.backup
+*.save
+*.save.*
+*.class
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3-journal
