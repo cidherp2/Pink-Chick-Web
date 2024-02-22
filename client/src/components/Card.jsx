@@ -179,7 +179,7 @@ const Card = () => {
     <>
       {merch.map((item) => (
         <MerchCard key={item.id} onClick={() => openModal(item)}>
-          <ImgDiv src={item.imageUrl} alt={item.name} />
+          <ImgDiv src={foto} alt={item.name} />
           <MerchInfo>
             <h1 className="titlo">{item.name}</h1>
             <p>{item.description} </p>
