@@ -13,7 +13,7 @@ function App() {
     <>
       <Elements stripe={stripePromise}>
         <CartProvider>
-          <Router>
+          <Router >
             <AppRoutes />
           </Router>
         </CartProvider>
