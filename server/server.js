@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3001;
 const sequelize = require('./config/connection')
@@ -12,6 +13,7 @@ sequelize.sync().then(()=> console.log("database is ready"))
 // })
 
 app.use(express.json());
+app.use(cors())
 app.use(express.urlencoded({ extended: true }));
 app.use(routes)
 
