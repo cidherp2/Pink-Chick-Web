@@ -128,7 +128,7 @@ const Card = () => {
       try {
        
         const response = await fetch(
-          'https://pink-chick-web-rx58.vercel.app/pink/api/merch' 
+          'https://pinkhicks-b921d828c404.herokuapp.com/pink/api/merch' 
           
         );
         if (!response.ok) {
