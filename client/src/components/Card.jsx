@@ -2,6 +2,11 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import MerchModal from './MerchModal'; // Import the MerchModal component
+import foto from "../assets/img10.webp"
+import foto2 from "../assets/img11.jpeg"
+import foto3 from "../assets/img12.png"
+import foto4 from "../assets/img13.png"
+
 
 const MerchCard = styled.div /*style*/`
   border-radius: 7px;
@@ -120,6 +125,13 @@ const MerchInfo = styled.div /*style*/`
 const Card = () => {
   const [merch, setMerch] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
+  
+  const traerImagenes = () => {
+    foto
+    foto2
+    foto3
+    foto4
+  }
  
 
 
