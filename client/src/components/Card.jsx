@@ -128,7 +128,7 @@ const Card = () => {
       try {
        
         const response = await fetch(
-          'http://localhost:5173/pink/api/merch' 
+          'https://pink-chick-web-rx58.vercel.app/pink/api/merch' 
           
         );
         if (!response.ok) {

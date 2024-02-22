@@ -10,8 +10,7 @@ const CheckoutForm = ({ items, totalPrice, isFormValid}) => {
   const handleCheckout = async ( ) => {
     // Call your server to create a Checkout Session
     const response = await fetch(
-      'http://localhost:5173/pink/api/pago/create-checkout-session' &&
-    'http://192.168.1.70:5173/pink/api/pago/create-checkout-session' , {
+      'https://pink-chick-web-rx58.vercel.app/pink/api/pago/create-checkout-session', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
