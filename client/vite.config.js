@@ -7,7 +7,7 @@ export default defineConfig({
   base:'/',
   server:{
     proxy:{
-      "/pink/":"http://localhost:3001/" ,
+      "/pink/":"https://pinkhicks-b921d828c404.herokuapp.com/" ,
     }, 
   },
   
